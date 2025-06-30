@@ -26,7 +26,7 @@
         },
         "fixHtml": {
           "deploymentBucketName": "amplify-webility-dev-d5542-deployment",
-          "s3Key": "amplify-builds/fixHtml-45507162636849454752-build.zip"
+          "s3Key": "amplify-builds/fixHtml-3265652f463348635878-build.zip"
         }
       },
       "auth": {

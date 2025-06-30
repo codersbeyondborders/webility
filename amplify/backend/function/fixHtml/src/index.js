@@ -86,7 +86,7 @@ exports.handler = async (event) => {
         Key: key,
         Body: fixedHtml,
         ContentType: 'text/html',
-      });
+      }).promise();
       console.log("Uploaded to S3:", key);
     } catch (uploadErr) {
       console.error("Failed to upload:", uploadErr);
