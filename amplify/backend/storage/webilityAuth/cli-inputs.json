@@ -1,0 +1,17 @@
+{
+  "resourceName": "webilityAuth",
+  "policyUUID": "315cee1a",
+  "bucketName": "webilityfe63cba63e3d43f58945a6b100f4887d",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

@@ -1,0 +1,21 @@
+{
+  "lambdaLayers": [],
+  "permissions": {
+    "auth": {
+      "webility8b7d1685": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "storage": {
+      "webilityAuth": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  }
+}

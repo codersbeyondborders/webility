@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "paths": {
+    "/fetch-html": {
+      "name": "/fetch-html",
+      "lambdaFunction": "fetchHtml",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/audit-html": {
+      "name": "/audit-html",
+      "lambdaFunction": "auditHtml",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/fix-html": {
+      "name": "/fix-html",
+      "lambdaFunction": "fixHtml",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

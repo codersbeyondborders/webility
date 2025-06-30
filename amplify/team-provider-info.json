@@ -1,0 +1,43 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-webility-dev-d5542-authRole",
+      "UnauthRoleArn": "arn:aws:iam::571935043575:role/amplify-webility-dev-d5542-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::571935043575:role/amplify-webility-dev-d5542-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-webility-dev-d5542-deployment",
+      "UnauthRoleName": "amplify-webility-dev-d5542-unauthRole",
+      "StackName": "amplify-webility-dev-d5542",
+      "StackId": "arn:aws:cloudformation:us-east-1:571935043575:stack/amplify-webility-dev-d5542/6b8c1760-55da-11f0-bcc9-0affcc3fac61",
+      "AmplifyAppId": "d2yxy0jh4zg804"
+    },
+    "categories": {
+      "hosting": {
+        "S3AndCloudFront": {}
+      },
+      "function": {
+        "fetchHtml": {
+          "deploymentBucketName": "amplify-webility-dev-d5542-deployment",
+          "s3Key": "amplify-builds/fetchHtml-4f5176324b4c7a4a516b-build.zip"
+        },
+        "auditHtml": {
+          "deploymentBucketName": "amplify-webility-dev-d5542-deployment",
+          "s3Key": "amplify-builds/auditHtml-4c4174722b696b694345-build.zip"
+        },
+        "fixHtml": {
+          "deploymentBucketName": "amplify-webility-dev-d5542-deployment",
+          "s3Key": "amplify-builds/fixHtml-45507162636849454752-build.zip"
+        }
+      },
+      "auth": {
+        "webility8b7d1685": {}
+      },
+      "api": {
+        "webilityAPI": {}
+      },
+      "storage": {
+        "webilityAuth": {}
+      }
+    }
+  }
+}

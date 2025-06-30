@@ -1,0 +1,165 @@
+{
+  "api": {
+    "webilityAPI": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "fetchHtml"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "auditHtml"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "fixHtml"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "auth": {
+    "webility8b7d1685": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  },
+  "function": {
+    "auditHtml": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "fetchHtml": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "HostingBucketName"
+          ],
+          "category": "hosting",
+          "resourceName": "S3AndCloudFront"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "fixHtml": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "webility8b7d1685"
+        },
+        {
+          "attributes": [
+            "BucketName"
+          ],
+          "category": "storage",
+          "resourceName": "webilityAuth"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "hosting": {
+    "S3AndCloudFront": {
+      "providerPlugin": "awscloudformation",
+      "service": "S3AndCloudFront"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_auditHtml_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "auditHtml"
+        }
+      ]
+    },
+    "AMPLIFY_function_auditHtml_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "auditHtml"
+        }
+      ]
+    },
+    "AMPLIFY_function_fetchHtml_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fetchHtml"
+        }
+      ]
+    },
+    "AMPLIFY_function_fetchHtml_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fetchHtml"
+        }
+      ]
+    },
+    "AMPLIFY_function_fixHtml_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fixHtml"
+        }
+      ]
+    },
+    "AMPLIFY_function_fixHtml_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fixHtml"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "webilityAuth": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
+  }
+}
