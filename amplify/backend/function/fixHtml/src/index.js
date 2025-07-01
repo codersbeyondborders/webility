@@ -6,7 +6,6 @@
 Amplify Params - DO NOT EDIT */
 
 const AWS = require('aws-sdk');
-
 const REGION = process.env.REGION || 'us-east-1'; 
 const s3 = new AWS.S3({ region: REGION });
 const rekognition = new AWS.Rekognition({ region: REGION });
@@ -18,6 +17,12 @@ const { URL } = require('url');
 
 const BUCKET_NAME = process.env.STORAGE_WEBILITYAUTH_BUCKETNAME || 'websibility-remediated-html';
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*', // Replace * with a domain in production
+  'Access-Control-Allow-Headers': '*',
+  'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+};
+
 function resolveUrl(base, relative) {
   try {
     return new URL(relative, base).href;
@@ -27,10 +32,19 @@ function resolveUrl(base, relative) {
 }
 
 exports.handler = async (event) => {
-  const { url } = JSON.parse(event.body);
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers: corsHeaders,
+      body: '',
+    };
+  }
+
+  const { url } = JSON.parse(event.body || '{}');
   if (!url || !/^https?:\/\/[^ "]+$/.test(url)) {
     return {
       statusCode: 400,
+      headers: corsHeaders,
       body: JSON.stringify({ error: 'Invalid or missing URL' }),
     };
   }
@@ -45,10 +59,10 @@ exports.handler = async (event) => {
     if ($('meta[charset]').length === 0) $('head').prepend('<meta charset="UTF-8" />');
     if ($('title').length === 0) $('head').prepend('<title>Fixed Page</title>');
 
-    // Clean potentially harmful scripts
+    // Remove potentially harmful elements
     $('script, iframe').remove();
 
-    // Accessibility: alt injection
+    // Fix missing alt tags using Rekognition
     const imgs = $('img:not([alt])');
     for (const el of imgs.toArray()) {
       const srcRaw = $(el).attr('src');
@@ -73,29 +87,23 @@ exports.handler = async (event) => {
       }
     }
 
-    // Fix headings and roles
+    // Fix structural issues
     $('b').each((_, el) => $(el).replaceWith(`<strong>${$(el).text()}</strong>`));
     $('[role=""]').removeAttr('role');
 
     const fixedHtml = $.html();
     const key = `fixed/${uuidv4()}.html`;
 
-    try {
-      await s3.putObject({
-        Bucket: BUCKET_NAME,
-        Key: key,
-        Body: fixedHtml,
-        ContentType: 'text/html',
-      }).promise();
-      console.log("Uploaded to S3:", key);
-    } catch (uploadErr) {
-      console.error("Failed to upload:", uploadErr);
-      throw uploadErr;
-    }    
-     
-    
+    await s3.putObject({
+      Bucket: BUCKET_NAME,
+      Key: key,
+      Body: fixedHtml,
+      ContentType: 'text/html',
+    }).promise();
+
     return {
       statusCode: 200,
+      headers: corsHeaders,
       body: JSON.stringify({
         fixedHtmlUrl: `https://${BUCKET_NAME}.s3.amazonaws.com/${key}`,
       }),
@@ -103,6 +111,7 @@ exports.handler = async (event) => {
   } catch (err) {
     return {
       statusCode: 500,
+      headers: corsHeaders,
       body: JSON.stringify({
         error: 'Failed to fix and upload HTML',
         details: err.message || 'Unknown error',

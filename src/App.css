@@ -1,26 +1,164 @@
-.App {
-  text-align: center;
+:root {
+  --bg-color: #f9fafa;
+  --text-color: #222;
+  --input-bg: #fff;
+  --input-border: #ccc;
+  --button-bg: #0044cc;
+  --button-text: #fff;
+  --error-bg: #ffeef0;
+  --error-text: #86181d;
+}
+
+.dark {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --input-bg: #1e1e1e;
+  --input-border: #333;
+  --button-bg: #0055ff;
+  --button-text: #fff;
+  --error-bg: #3b0000;
+  --error-text: #ffbcbc;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: system-ui, sans-serif;
   padding: 2rem;
-  font-family: sans-serif;
+  margin: 0;
+}
+
+.app-container {
+  max-width: 600px;
+  margin: auto;
+}
+
+header h1 {
+  font-size: 1.8rem;
+}
+
+.toggle-container {
+  margin-top: 1rem;
 }
 
 form {
+  display: flex;
+  flex-direction: column;
   margin-top: 2rem;
 }
 
-input[type='url'] {
-  padding: 0.5rem;
-  width: 300px;
+label {
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+input[type="url"] {
+  background: var(--input-bg);
+  color: var(--text-color);
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+  padding: 0.75rem;
   font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+input:focus {
+  outline: 2px solid var(--button-bg);
 }
 
 button {
-  padding: 0.5rem 1rem;
-  margin-left: 1rem;
+  background: var(--button-bg);
+  color: var(--button-text);
+  padding: 0.75rem;
   font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.result, .error {
+button:disabled {
+  background: #888;
+}
+
+.error-message {
+  background: var(--error-bg);
+  color: var(--error-text);
+  padding: 1rem;
+  border-left: 4px solid #d73a49;
+  margin-top: 1rem;
+}
+
+.result {
   margin-top: 2rem;
-  font-size: 1.1rem;
+}
+
+iframe {
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+.toggle-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.toggle-label {
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  font-size: 16px;
+}
+
+.toggle-slider::before {
+  content: "";
+  position: absolute;
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+/* Move knob on toggle */
+.toggle-input:checked + .toggle-slider::before {
+  transform: translateX(30px);
+}
+
+.toggle-input:checked + .toggle-slider {
+  background-color: #4a90e2;
+}
+
+.toggle-icon {
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
 }

@@ -18,15 +18,15 @@
       "function": {
         "fetchHtml": {
           "deploymentBucketName": "amplify-webility-dev-d5542-deployment",
-          "s3Key": "amplify-builds/fetchHtml-4f5176324b4c7a4a516b-build.zip"
+          "s3Key": "amplify-builds/fetchHtml-737770697a5655305058-build.zip"
         },
         "auditHtml": {
           "deploymentBucketName": "amplify-webility-dev-d5542-deployment",
-          "s3Key": "amplify-builds/auditHtml-4c4174722b696b694345-build.zip"
+          "s3Key": "amplify-builds/auditHtml-2b6d3145506f3978786e-build.zip"
         },
         "fixHtml": {
           "deploymentBucketName": "amplify-webility-dev-d5542-deployment",
-          "s3Key": "amplify-builds/fixHtml-3265652f463348635878-build.zip"
+          "s3Key": "amplify-builds/fixHtml-67666939794650614e61-build.zip"
         }
       },
       "auth": {
